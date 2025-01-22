@@ -9,7 +9,9 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get("http://localhost:3000/api/todolist");
+        const result = await axios.get(
+          "https://hulujenstodolist.netlify.app/api/todolist"
+        );
         setList(result.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -21,9 +23,12 @@ export default function Home() {
 
   const dataRetriever = async () => {
     try {
-      const result = await axios.post("http://localhost:3000/api/todolist", {
-        title: value,
-      });
+      const result = await axios.post(
+        "https://hulujenstodolist.netlify.app/api/todolist",
+        {
+          title: value,
+        }
+      );
       setData(result.data);
       setValue("");
     } catch (error) {
@@ -40,12 +45,14 @@ export default function Home() {
   const editTodo = async (id: string, updatedTitle: string) => {
     try {
       await axios.put(
-        `http://localhost:3000/api/todolist?id=${id}`,
+        `https://hulujenstodolist.netlify.app/api/todolist?id=${id}`,
         { title: updatedTitle },
         { headers: { "Content-Type": "application/json" } }
       );
 
-      const result = await axios.get("http://localhost:3000/api/todolist");
+      const result = await axios.get(
+        "https://hulujenstodolist.netlify.app/api/todolist"
+      );
       setList(result.data);
     } catch (error) {
       console.error("Error updating todo:", error);
@@ -54,7 +61,7 @@ export default function Home() {
 
   const deleteTodo = async (id: string) => {
     try {
-      await axios.delete("http://localhost:3000/api/todolist", {
+      await axios.delete("https://hulujenstodolist.netlify.app/api/todolist", {
         data: { id },
       });
 
